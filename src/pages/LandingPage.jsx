@@ -6,6 +6,20 @@ import Button from '../components/ui/Button'
 import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
 
+// Import brand icons
+import { 
+  FaReact, FaNodeJs, FaPython, FaJava, FaJs, 
+  FaAws, FaGoogle, FaGithub, FaDocker, FaFigma 
+} from 'react-icons/fa'
+import { 
+  SiTypescript, SiNextdotjs, SiTailwindcss, 
+  SiMongodb, SiPostgresql, SiFirebase, 
+  SiVercel, SiRedux, SiGraphql, SiKubernetes,
+  SiDjango, SiFlask, SiExpress, SiNestjs,
+  SiAmazon, SiMicrosoft, SiApple, SiIntel,
+  SiNvidia, SiAdobe, SiSpotify, SiNetflix
+} from 'react-icons/si'
+
 export default function LandingPage() {
   const { isAuthenticated } = useSelector((state) => state.auth)
   const { currentPhase } = useSelector((state) => state.phase)
@@ -23,6 +37,38 @@ export default function LandingPage() {
   }
 
   const phaseInfo = getPhaseInfo()
+
+  // Logo data with minimal black style and real colors on hover
+  const topLogos = [
+    { Icon: FaReact, name: 'React', color: '#61DAFB', delay: '0s' },
+    { Icon: SiTypescript, name: 'TypeScript', color: '#3178C6', delay: '0.2s' },
+    { Icon: SiNextdotjs, name: 'Next.js', color: '#000000', delay: '0.4s' },
+    { Icon: FaNodeJs, name: 'Node.js', color: '#339933', delay: '0.6s' },
+    { Icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4', delay: '0.8s' },
+    { Icon: SiRedux, name: 'Redux', color: '#764ABC', delay: '1s' },
+    { Icon: SiGraphql, name: 'GraphQL', color: '#E10098', delay: '1.2s' },
+    { Icon: SiNestjs, name: 'NestJS', color: '#E0234E', delay: '1.4s' },
+  ]
+
+  const bottomLogos = [
+    { Icon: FaPython, name: 'Python', color: '#3776AB', delay: '0s' },
+    { Icon: SiDjango, name: 'Django', color: '#092E20', delay: '0.2s' },
+    { Icon: FaAws, name: 'AWS', color: '#FF9900', delay: '0.4s' },
+    { Icon: FaGoogle, name: 'Google', color: '#4285F4', delay: '0.6s' },
+    { Icon: SiMicrosoft, name: 'Microsoft', color: '#00A4EF', delay: '0.8s' },
+    { Icon: FaDocker, name: 'Docker', color: '#2496ED', delay: '1s' },
+    { Icon: SiKubernetes, name: 'Kubernetes', color: '#326CE5', delay: '1.2s' },
+    { Icon: SiMongodb, name: 'MongoDB', color: '#47A248', delay: '1.4s' },
+    { Icon: SiPostgresql, name: 'PostgreSQL', color: '#336791', delay: '1.6s' },
+    { Icon: SiFirebase, name: 'Firebase', color: '#FFCA28', delay: '1.8s' },
+    { Icon: FaFigma, name: 'Figma', color: '#F24E1E', delay: '2s' },
+    { Icon: SiAdobe, name: 'Adobe', color: '#FF0000', delay: '2.2s' },
+    { Icon: SiNvidia, name: 'NVIDIA', color: '#76B900', delay: '2.4s' },
+    { Icon: SiIntel, name: 'Intel', color: '#0071C5', delay: '2.6s' },
+    { Icon: SiApple, name: 'Apple', color: '#000000', delay: '2.8s' },
+    { Icon: SiSpotify, name: 'Spotify', color: '#1DB954', delay: '3s' },
+    { Icon: SiNetflix, name: 'Netflix', color: '#E50914', delay: '3.2s' },
+  ]
 
   // EVENT LOCATION - CHANGE THIS TO YOUR LOCATION
   const eventLocation = {
@@ -223,6 +269,85 @@ export default function LandingPage() {
                 </>
               )}
             </div>
+          </div>
+        </section>
+
+        {/* Infinite Scroll Logo Marquee Section */}
+        <section className="py-12 bg-white overflow-hidden">
+          <div className="relative">
+            {/* Fade gradients on left and right */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+            
+            {/* Top Row - Scrolls to Right */}
+            <div className="mb-10">
+              <div className="flex animate-scroll-right">
+                {/* Double the logos for seamless loop */}
+                {[...topLogos, ...topLogos].map((logo, index) => (
+                  <div 
+                    key={`top-${index}`}
+                    className="flex-shrink-0 px-8"
+                    style={{ animationDelay: logo.delay }}
+                  >
+                    <div className="group relative flex flex-col items-center">
+                      <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-gray-50 border border-gray-200 group-hover:border-transparent transition-all duration-500 group-hover:shadow-lg">
+                        <logo.Icon 
+                          className="w-12 h-12 text-gray-800 group-hover:scale-110 transition-all duration-500"
+                        />
+                      </div>
+                      <span className="mt-3 text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors">
+                        {logo.name}
+                      </span>
+                      {/* Color overlay on hover */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-500"
+                        style={{ backgroundColor: logo.color }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Bottom Row - Scrolls to Left */}
+            <div>
+              <div className="flex animate-scroll-left">
+                {/* Double the logos for seamless loop */}
+                {[...bottomLogos, ...bottomLogos].map((logo, index) => (
+                  <div 
+                    key={`bottom-${index}`}
+                    className="flex-shrink-0 px-8"
+                    style={{ animationDelay: logo.delay }}
+                  >
+                    <div className="group relative flex flex-col items-center">
+                      <div className="w-20 h-20 flex items-center justify-center rounded-xl bg-gray-50 border border-gray-200 group-hover:border-transparent transition-all duration-500 group-hover:shadow-lg">
+                        <logo.Icon 
+                          className="w-12 h-12 text-gray-800 group-hover:scale-110 transition-all duration-500"
+                        />
+                      </div>
+                      <span className="mt-3 text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors">
+                        {logo.name}
+                      </span>
+                      {/* Color overlay on hover */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-500"
+                        style={{ backgroundColor: logo.color }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Section Title */}
+          <div className="text-center mt-12">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+              Technologies & Partners
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Work with industry-leading technologies and tools supported by our partners
+            </p>
           </div>
         </section>
 

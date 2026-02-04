@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Animations */
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-right {
+  animation: scroll-right 40s linear infinite;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 50s linear infinite;
+}
+
+/* Pause animation on hover */
+.animate-scroll-right:hover,
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}
+
+/* Logo hover effect */
+.logo-item {
+  transition: all 0.3s ease;
+}
+
+.logo-item:hover .logo-icon {
+  transform: scale(1.1);
+}
+
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
@@ -61,5 +103,43 @@
   
   .chat-bubble {
     @apply max-w-[70%] rounded-2xl px-4 py-3 shadow-sm;
+  }
+  
+  /* Logo Marquee Styles */
+  .logo-marquee-container {
+    @apply relative overflow-hidden;
+  }
+  
+  .logo-marquee-fade {
+    @apply absolute top-0 bottom-0 w-32 z-10 pointer-events-none;
+  }
+  
+  .logo-marquee-fade-left {
+    @apply logo-marquee-fade left-0 bg-gradient-to-r from-white dark:from-dark-900 to-transparent;
+  }
+  
+  .logo-marquee-fade-right {
+    @apply logo-marquee-fade right-0 bg-gradient-to-l from-white dark:from-dark-900 to-transparent;
+  }
+  
+  /* Logo item styles */
+  .logo-item-container {
+    @apply flex-shrink-0 px-8;
+  }
+  
+  .logo-icon-wrapper {
+    @apply w-20 h-20 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 transition-all duration-500 group-hover:border-transparent group-hover:shadow-lg;
+  }
+  
+  .logo-icon {
+    @apply w-12 h-12 text-gray-800 dark:text-gray-300 transition-all duration-500 group-hover:scale-110;
+  }
+  
+  .logo-name {
+    @apply mt-3 text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors;
+  }
+  
+  .logo-color-overlay {
+    @apply absolute inset-0 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-500;
   }
 }
