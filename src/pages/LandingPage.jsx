@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FaRocket, FaUsers, FaTrophy, FaCode, FaCalendar, FaClock, FaHeart, FaLaptopCode, FaUsersCog, FaFileCode, FaAward, FaChartLine } from 'react-icons/fa'
+import { FaRocket, FaUsers, FaTrophy, FaCode, FaCalendar, FaClock, FaHeart, FaLaptopCode, FaUsersCog, FaFileCode, FaAward, FaChartLine, FaMapMarkerAlt } from 'react-icons/fa'
 import { HiOutlineUserGroup, HiOutlineLightningBolt, HiOutlineClipboardCheck, HiOutlinePresentationChartLine } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import Button from '../components/ui/Button'
@@ -23,6 +23,19 @@ export default function LandingPage() {
   }
 
   const phaseInfo = getPhaseInfo()
+
+  // EVENT LOCATION - CHANGE THIS TO YOUR LOCATION
+  const eventLocation = {
+    name: 'Tech Innovation Center',
+    address: '123 Innovation Drive, San Francisco, CA 94107',
+    coordinates: '37.7749,-122.4194', // Latitude,Longitude for San Francisco
+    googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.6821566882766!2d-122.419416484682!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c9a1c7c6d%3A0x3c4c3c8b0b0b0b0b!2s123%20Innovation%20Drive%2C%20San%20Francisco%2C%20CA%2094107!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus'
+    // To get a new embed URL: 
+    // 1. Go to Google Maps
+    // 2. Find your location
+    // 3. Click "Share" → "Embed a map"
+    // 4. Copy the iframe src URL
+  }
 
   // Roadmap data
   const roadmapSteps = [
@@ -132,9 +145,6 @@ export default function LandingPage() {
       colSpan: 'col-span-1 md:col-span-1',
       rowSpan: 'row-span-1'
     },
-  
-  
-  
   ]
 
   return (
@@ -468,6 +478,128 @@ export default function LandingPage() {
                 <div className="text-gray-400">In Prizes</div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Event Location Map Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-900 text-white rounded-full mb-4">
+                <FaMapMarkerAlt className="w-6 h-6" />
+              </div>
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">Event Location</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Join us at our venue for an unforgettable hackathon experience
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Location Details Card */}
+              <div className="lg:col-span-1">
+                <div className="bg-gray-50 border border-gray-200 p-6 rounded-lg h-full">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Venue Details</h3>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
+                        <FaMapMarkerAlt className="w-4 h-4 text-gray-900" />
+                        Location
+                      </h4>
+                      <p className="text-gray-600">{eventLocation.name}</p>
+                      <p className="text-gray-600">{eventLocation.address}</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Event Details</h4>
+                      <ul className="space-y-2 text-gray-600">
+                        <li className="flex items-start">
+                          <span className="inline-block w-2 h-2 bg-gray-900 rounded-full mt-2 mr-3"></span>
+                          <span>24-hour non-stop hackathon</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="inline-block w-2 h-2 bg-gray-900 rounded-full mt-2 mr-3"></span>
+                          <span>Free food & beverages provided</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="inline-block w-2 h-2 bg-gray-900 rounded-full mt-2 mr-3"></span>
+                          <span>High-speed internet access</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="inline-block w-2 h-2 bg-gray-900 rounded-full mt-2 mr-3"></span>
+                          <span>Comfortable workspaces</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Getting There</h4>
+                      <p className="text-gray-600 mb-3">
+                        The venue is easily accessible by public transportation and has ample parking available.
+                      </p>
+                      <a
+                        href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(eventLocation.address)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-gray-900 hover:text-gray-700 font-medium"
+                      >
+                        <FaMapMarkerAlt className="w-4 h-4 mr-2" />
+                        Get Directions
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Map Container */}
+              <div className="lg:col-span-2">
+                <div className="border border-gray-200 rounded-lg overflow-hidden h-full">
+                  <div className="relative h-[400px] md:h-[500px]">
+                    <iframe
+                      src={eventLocation.googleMapsEmbedUrl}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Hackathon Event Location"
+                      className="absolute inset-0"
+                    ></iframe>
+                    
+                    {/* Map Overlay Instructions */}
+                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-md shadow-sm">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Tip:</span> Drag to explore the area around the venue
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Map Footer */}
+                  <div className="bg-gray-50 px-4 py-3 border-t border-gray-200">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <p className="text-sm text-gray-600">
+                        View on{' '}
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventLocation.address)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-900 hover:underline font-medium"
+                        >
+                          Google Maps
+                        </a>
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        Location: {eventLocation.coordinates}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Location Update Note */}
+          
           </div>
         </section>
       </main>
