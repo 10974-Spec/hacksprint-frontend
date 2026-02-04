@@ -1,0 +1,478 @@
+import { Link } from 'react-router-dom'
+import { FaRocket, FaUsers, FaTrophy, FaCode, FaCalendar, FaClock, FaHeart, FaLaptopCode, FaUsersCog, FaFileCode, FaAward, FaChartLine } from 'react-icons/fa'
+import { HiOutlineUserGroup, HiOutlineLightningBolt, HiOutlineClipboardCheck, HiOutlinePresentationChartLine } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import Button from '../components/ui/Button'
+import Navigation from '../components/layout/Navigation'
+import Footer from '../components/layout/Footer'
+
+export default function LandingPage() {
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  const { currentPhase } = useSelector((state) => state.phase)
+
+  const getPhaseInfo = () => {
+    const phases = {
+      registration: { label: 'Registration', color: 'text-blue-600' },
+      team_formation: { label: 'Team Formation', color: 'text-green-600' },
+      hackathon_live: { label: 'Hackathon Live', color: 'text-purple-600' },
+      submission: { label: 'Submission', color: 'text-yellow-600' },
+      judging: { label: 'Judging', color: 'text-orange-600' },
+      results: { label: 'Results', color: 'text-red-600' },
+    }
+    return phases[currentPhase] || phases.registration
+  }
+
+  const phaseInfo = getPhaseInfo()
+
+  // Roadmap data
+  const roadmapSteps = [
+    {
+      id: 1,
+      title: 'Registration',
+      description: 'Sign up and get approved to participate',
+      icon: <FaUsers className="w-5 h-5" />,
+      color: 'border-blue-600',
+      hoverColor: 'bg-blue-50',
+      position: 'left'
+    },
+    {
+      id: 2,
+      title: 'Team Formation',
+      description: 'Join or create your dream team',
+      icon: <FaUsersCog className="w-5 h-5" />,
+      color: 'border-green-600',
+      hoverColor: 'bg-green-50',
+      position: 'right'
+    },
+    {
+      id: 3,
+      title: 'Hackathon Kickoff',
+      description: '24-hour coding marathon begins',
+      icon: <FaLaptopCode className="w-5 h-5" />,
+      color: 'border-purple-600',
+      hoverColor: 'bg-purple-50',
+      position: 'left'
+    },
+    {
+      id: 4,
+      title: 'Project Submission',
+      description: 'Submit your final project',
+      icon: <FaFileCode className="w-5 h-5" />,
+      color: 'border-yellow-600',
+      hoverColor: 'bg-yellow-50',
+      position: 'right'
+    },
+    {
+      id: 5,
+      title: 'Judging',
+      description: 'Projects evaluated by experts',
+      icon: <HiOutlinePresentationChartLine className="w-5 h-5" />,
+      color: 'border-orange-600',
+      hoverColor: 'bg-orange-50',
+      position: 'left'
+    },
+    {
+      id: 6,
+      title: 'Results & Awards',
+      description: 'Winners announced and prizes awarded',
+      icon: <FaAward className="w-5 h-5" />,
+      color: 'border-red-600',
+      hoverColor: 'bg-red-50',
+      position: 'right'
+    }
+  ]
+
+  // Image gallery data
+  const galleryImages = [
+    {
+      id: 1,
+      src: '/img1.jpeg',
+      alt: 'Hackathon participants collaborating',
+      size: 'big', // big or small
+      colSpan: 'col-span-2 md:col-span-2',
+      rowSpan: 'row-span-2'
+    },
+    {
+      id: 2,
+      src: '/img2.jpeg',
+      alt: 'Coding session in progress',
+      size: 'small',
+      colSpan: 'col-span-1 md:col-span-1',
+      rowSpan: 'row-span-1'
+    },
+    {
+      id: 3,
+      src: '/img3.jpeg',
+      alt: 'Team brainstorming ideas',
+      size: 'small',
+      colSpan: 'col-span-1 md:col-span-1',
+      rowSpan: 'row-span-1'
+    },
+    {
+      id: 4,
+      src: '/img4.jpeg',
+      alt: 'Final presentations',
+      size: 'big',
+      colSpan: 'col-span-2 md:col-span-2',
+      rowSpan: 'row-span-2'
+    },
+    {
+      id: 5,
+      src: '/img5.jpeg',
+      alt: 'Networking at the event',
+      size: 'small',
+      colSpan: 'col-span-1 md:col-span-1',
+      rowSpan: 'row-span-1'
+    },
+    {
+      id: 6,
+      src: '/img6.jpeg',
+      alt: 'Winners celebration',
+      size: 'small',
+      colSpan: 'col-span-1 md:col-span-1',
+      rowSpan: 'row-span-1'
+    },
+  
+  
+  
+  ]
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navigation />
+      
+      <main>
+        {/* Hero Section with Image */}
+        <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+          {/* Background Image with Gradient Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/image1.jpeg" 
+              alt="Hackathon Hero" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
+          </div>
+          
+          {/* Hero Content */}
+          <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+            {/* Phase & Donate Badge */}
+            <div className="inline-flex items-center gap-6 mb-8 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
+              <div className="flex items-center gap-2">
+                <div className={`w-2 h-2 ${phaseInfo.color}`}></div>
+                <span className="font-medium text-white">{phaseInfo.label}</span>
+              </div>
+              <div className="h-4 w-px bg-white/30"></div>
+              <Link 
+                to="/donate" 
+                className="flex items-center gap-2 text-white hover:text-red-300 transition-colors group"
+              >
+                <FaHeart className="w-3 h-3 text-red-400 group-hover:text-red-300 transition-colors" />
+                <span className="text-sm font-medium">Donate</span>
+              </Link>
+            </div>
+            
+            {/* Main Headline */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              <span className="block">Build.</span>
+              <span className="block mt-2">Collaborate.</span>
+              <span className="block mt-2">Innovate.</span>
+            </h1>
+            
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+              Join the ultimate 24-hour hackathon experience. Work with brilliant minds,
+              build amazing projects, and compete for incredible prizes.
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              {isAuthenticated ? (
+                <Link to="/dashboard">
+                  <Button size="lg" className="px-8 bg-gray-900 text-white hover:bg-gray-800 border-0">
+                    Go to Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link to="/signup">
+                    <Button size="lg" className="px-8 bg-gray-900 text-white hover:bg-gray-800 border-0">
+                      <FaRocket className="mr-2" />
+                      Get Started
+                    </Button>
+                  </Link>
+                  <Link to="/login">
+                    <Button 
+                      variant="secondary" 
+                      size="lg" 
+                      className="px-8 bg-transparent border border-white text-white hover:bg-white/10"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Participate Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">Why Participate?</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Our hackathon brings together the best minds for an unforgettable experience
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Card 1 */}
+              <div className="border border-gray-200 p-6 hover:border-gray-900 transition-all duration-300 group">
+                <div className="mb-4">
+                  <HiOutlineUserGroup className="w-8 h-8 text-gray-900 group-hover:text-blue-600 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Team Collaboration</h3>
+                <p className="text-gray-600">
+                  Work with talented developers, designers, and innovators. Build connections that last beyond the hackathon.
+                </p>
+              </div>
+              
+              {/* Card 2 */}
+              <div className="border border-gray-200 p-6 hover:border-gray-900 transition-all duration-300 group">
+                <div className="mb-4">
+                  <FaTrophy className="w-8 h-8 text-gray-900 group-hover:text-yellow-600 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Amazing Prizes</h3>
+                <p className="text-gray-600">
+                  Win cash prizes, tech gadgets, mentorship opportunities, and recognition from industry leaders.
+                </p>
+              </div>
+              
+              {/* Card 3 */}
+              <div className="border border-gray-200 p-6 hover:border-gray-900 transition-all duration-300 group">
+                <div className="mb-4">
+                  <HiOutlineLightningBolt className="w-8 h-8 text-gray-900 group-hover:text-purple-600 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Real Projects</h3>
+                <p className="text-gray-600">
+                  Build solutions to real-world problems. Your project could be the next big thing!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Event Timeline Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="border border-gray-200 bg-white p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-6">Event Timeline</h2>
+                  <div className="space-y-6">
+                    {/* Timeline Item 1 */}
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 border border-gray-200 flex items-center justify-center group-hover:border-gray-900 transition-colors">
+                        <FaCalendar className="w-5 h-5 text-gray-900" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">24-Hour Hackathon</h4>
+                        <p className="text-gray-600 mt-1">
+                          Build your project from scratch in just 24 hours
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Timeline Item 2 */}
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 border border-gray-200 flex items-center justify-center group-hover:border-gray-900 transition-colors">
+                        <HiOutlineClipboardCheck className="w-5 h-5 text-gray-900" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Real-time Collaboration</h4>
+                        <p className="text-gray-600 mt-1">
+                          Team chat, GitHub integration, and live updates
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Join Button */}
+                  <div className="mt-8">
+                    <Link to="/signup">
+                      <Button size="lg" className="px-8 bg-gray-900 text-white hover:bg-gray-800">
+                        Join Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div>
+                  <div className="border border-gray-200 p-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-900">Current Phase</span>
+                        <span className={`font-medium ${phaseInfo.color}`}>
+                          {phaseInfo.label}
+                        </span>
+                      </div>
+                      
+                      {/* Progress Bar */}
+                      <div className="h-2 bg-gray-100 overflow-hidden">
+                        <div
+                          className="h-full bg-gray-900 transition-all duration-1000"
+                          style={{
+                            width: phaseInfo.progress || '16%'
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Phase Labels */}
+                      <div className="grid grid-cols-6 gap-1 text-xs text-gray-500">
+                        <div className="text-center">Reg.</div>
+                        <div className="text-center">Teams</div>
+                        <div className="text-center">Live</div>
+                        <div className="text-center">Submit</div>
+                        <div className="text-center">Judge</div>
+                        <div className="text-center">Results</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Roadmap Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">Event Roadmap</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Follow the journey from registration to victory
+              </p>
+            </div>
+            
+            {/* Roadmap Container */}
+            <div className="relative">
+              {/* Connecting Line */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-300 transform -translate-x-1/2 hidden md:block"></div>
+              
+              {/* Roadmap Steps */}
+              <div className="space-y-12">
+                {roadmapSteps.map((step, index) => (
+                  <div 
+                    key={step.id}
+                    className={`relative flex items-center ${
+                      step.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } gap-8`}
+                  >
+                    {/* Left Side Content */}
+                    {step.position === 'left' ? (
+                      <div className="flex-1 text-right hidden md:block">
+                        <h3 className="font-semibold text-gray-900 text-lg">{step.title}</h3>
+                        <p className="text-gray-600 mt-1">{step.description}</p>
+                      </div>
+                    ) : null}
+                    
+                    {/* Center Node */}
+                    <div className="relative z-10 flex-shrink-0">
+                      <div 
+                        className={`w-12 h-12 border-2 ${step.color} flex items-center justify-center bg-white hover:${step.hoverColor} transition-colors cursor-pointer group`}
+                      >
+                        <div className="text-gray-900 group-hover:scale-110 transition-transform">
+                          {step.icon}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Right Side Content */}
+                    {step.position === 'right' ? (
+                      <div className="flex-1 hidden md:block">
+                        <h3 className="font-semibold text-gray-900 text-lg">{step.title}</h3>
+                        <p className="text-gray-600 mt-1">{step.description}</p>
+                      </div>
+                    ) : null}
+                    
+                    {/* Mobile Content (always shows below) */}
+                    <div className="flex-1 md:hidden">
+                      <h3 className="font-semibold text-gray-900 text-lg">{step.title}</h3>
+                      <p className="text-gray-600 mt-1">{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Image Gallery Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4">
+            {/* Gallery Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
+              {galleryImages.map((image) => (
+                <div
+                  key={image.id}
+                  className={`relative overflow-hidden ${image.colSpan} ${image.rowSpan} group`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {image.alt}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Optional: Gallery Navigation/Controls */}
+            <div className="mt-8 text-center">
+              <p className="text-gray-600 italic text-sm">
+                Glimpses from previous hackathon events
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Section */}
+        <section className="py-16 bg-gray-900 text-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">500+</div>
+                <div className="text-gray-400">Participants</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">50+</div>
+                <div className="text-gray-400">Projects</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">24</div>
+                <div className="text-gray-400">Hours</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">$10k+</div>
+                <div className="text-gray-400">In Prizes</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  )
+}
